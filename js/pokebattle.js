@@ -21,8 +21,8 @@ $(function(){
 		hpBar: $('#pokemon-hp-bar'),
 		img: 'assets/back/pikachu.png',
 		altImg: 'assets/back/pikachu2.png',
-		move1: new move('TACKLE', 25, 25, 2),
-		move2: new move('SCRATCH', 25, 25, 3),
+		move1: new move('TACKLE', 20, 20, 2),
+		move2: new move('SCRATCH', 15, 15, 3),
 		move3: new move('TAIL WHIP', 25, 25, 1),
 		move4: new move('SAND ATTACK', 25, 25, 1),
 
@@ -118,6 +118,19 @@ $(function(){
 			switchToMenu();
 			dialogue.toggle(trainer.name.html() + ' gains experience!');
 			trainer.victoryAnimation();
+      $.ajax({
+          type: 'POST',
+          url: 'http://localhost:3000/win',
+          dataType: 'json',
+          data: { pokemon: trainer.name.html() },
+          success: function(data){
+            console.log(data);
+          },
+
+          error: function(data){
+            console.log(data);
+          }
+      });
 		}
 
 		else {
@@ -127,10 +140,17 @@ $(function(){
 
   $.ajax({
       type: 'GET',
-      url: 'http://http://188.166.240.238//random_pokemon',
+      url: 'http://localhost:3000/random_pokemon',
       dataType: 'json',
       success: function(data){
-        console.log(data);
+        pokemon = data.pokemon;
+        trainer.hpRemaining.html(pokemon.hp);
+        trainer.hpTotal.html(pokemon.hp);
+        trainer.level.html(pokemon.level);
+        trainer.img = 'assets/back/' + pokemon.name + '.png';
+        trainer.altImg = 'assets/back/' + pokemon.name + '2.png';
+        trainer.sprite.attr('src', trainer.img);
+        trainer.name.html(pokemon.name.toUpperCase());        
       },
 
       error: function(data){
@@ -139,12 +159,19 @@ $(function(){
   });
 
   $.ajax({
-      type: 'POST',
-      url: 'http://http://188.166.240.238//win',
+      type: 'GET',
+      url: 'http://localhost:3000/random_opponent',
       dataType: 'json',
-      data: { pokemon: trainer.name.html() },
       success: function(data){
-        console.log(data);
+        pokemon = data.pokemon;
+        opponent.hpRemaining = pokemon.hp;
+        opponent.hpTotal = pokemon.hp;
+        opponent.level.html(pokemon.level);
+        opponent.img = 'assets/front/' + pokemon.name + '.png';
+        opponent.altImg = 'assets/front/' + pokemon.name + '2.png';
+        opponent.sprite.attr('src', opponent.img);
+        opponent.name.html(pokemon.name.toUpperCase());
+        dialogue.html('A wild ' + pokemon.name.toUpperCase() + ' appeared!');
       },
 
       error: function(data){
@@ -162,18 +189,26 @@ $(function(){
 
   fight.move1.img.click(function(){
     playerAttack(opponent, trainer.move1.damage);
+    trainer.move1.remaining--;
+    fight.move1.pp.html(trainer.move1.remaining + '/' + trainer.move1.total);
   });
 
   fight.move2.img.click(function(){
     playerAttack(opponent, trainer.move2.damage);
+    trainer.move2.remaining--;
+    fight.move2.pp.html(trainer.move2.remaining + '/' + trainer.move2.total);
   });
 
   fight.move3.img.click(function(){
     playerAttack(opponent, trainer.move3.damage);
+    trainer.move3.remaining--;
+    fight.move3.pp.html(trainer.move3.remaining + '/' + trainer.move3.total);
   });
 
   fight.move4.img.click(function(){
     playerAttack(opponent, trainer.move4.damage);
+    trainer.move4.remaining--;
+    fight.move4.pp.html(trainer.move4.remaining + '/' + trainer.move4.total);
   });
 
 });
