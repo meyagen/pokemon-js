@@ -216,14 +216,6 @@ $(function(){
       dataType: 'json',
 
       // data is the json object returned by the server
-      {
-        pokemon: {
-          hp: 20,
-          level: 8,
-          name: 'pikachu'
-        }
-      }
-
       // here we'll change our pokemon's sprite, level, and hp according to the server's data
       success: function(data){
         pokemon = data.pokemon;
