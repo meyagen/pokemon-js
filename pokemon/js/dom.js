@@ -5,15 +5,12 @@ window.onload = init;
 
 // example of DOM manipulation using vanilla javascript
 function init(){
+  var opponent = document.getElementById('opponent-name');
+  opponent.innerHTML = "RATATATATATATATA";
+
 	var name = document.getElementById('pokemon-name');
 	var last_name = document.createTextNode(' Pikapi');
 	name.appendChild(last_name);
-	document.body.appendChild(name);
-
-	var opponent = document.getElementById('opponent-name');
-	opponent.innerHTML = "RATATATATATATATA";
-
-	var opponentIMG = document.getElementById('opponent-name');
 }
 
 // example of DOM manipulation using jquery

@@ -2,7 +2,7 @@
 // this lets your pokemon attack another pokemon until it faints
 // visual feedback is given through dom manipulation (via jquery)
 // creating a full game where you take turns with the opponent in attacking requires some gamedev concepts which are outside the scope of this tutorial
-// this will be left as an exercise to the interested reader; if curious, you can shoot me a message on how this can be done :)
+// this will be left as an exercise to the interested reader
 
 // first let's create constructors for a few objects we'll be declaring later
 // a constructor is just a template for the object
@@ -63,7 +63,7 @@ $(function(){
 			}
 
 			else {
-				victim.hpBar.animate({'width': hp + 'px', 'background-color': '#18c020'}); // red
+				victim.hpBar.animate({'width': hp + 'px', 'background-color': '#18c020'}); // green
 			}
 		},
 
@@ -126,19 +126,17 @@ $(function(){
   // so let's make the main menu appear using vanilla js
 	menu.main.css('display', 'block');
 
-  // refresh the 
-
   // we'll need to switch frequently between the main menu and the fight menu, so let's create functions for that
-	function switchToFight(){
+	function switchToFight() {
 		menu.main.hide(); // here we'll use jquery instead of vanilla js; it sets the display property to none
 		fight.main.show(); // this is the jquery equivalent of the code above; it sets the display property to block
 	}
 
   // notice we switched from vanilla js to jquery
-  // they both do the same thing, but the code for jquery is shorter and easier to read (it's almost like it's english!)
+  // they both do the same thing, but the code for jquery is shorter and easier to read
 
   // of couse, we also need to be able to switch to the other menu so let's do that
-	function switchToMenu(){
+	function switchToMenu() {
 		fight.main.hide();
 		menu.main.show();
 	}
@@ -154,10 +152,7 @@ $(function(){
     switchToMenu();
   });
 
-  // refresh the page in your browser and try clicking those buttons. you should be able to switch between them.
-
-  // great! now let's try actually attacking our opponent
-  // we'll only be able to attack our opponent if we click a move image (one of the four purple boxes in the fight menu), so let's do that
+  // we'll only be able to attack our opponent if we click a move image (one of the four purple boxes in the fight menu)
   fight.move1.img.click(function(){
     // let's create a playerAttack function since we'll be reusing the code for this for moves 2-4
     playerAttack(opponent, trainer.move1.damage);
