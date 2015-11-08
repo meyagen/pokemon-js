@@ -1,6 +1,6 @@
 //common ways to output
 
-console.log("");
+alert("");
 
 console.log("");
 
@@ -10,7 +10,7 @@ var x = 35;
 
 /*
 Notice that we did not define a type for the variable,
-like int var x = 51. That is because we did not have to.
+like int var x = 35. That is because we did not have to.
 */
 
 /*variables in javascript have dynamic types
@@ -29,7 +29,7 @@ typeof operator
 typeof x //returns "number"
 
 /*
-Take note that 51 is an integer, but typeof simply returns
+Take note that 35 is an integer, but typeof simply returns
 "number". Javascript makes no distinction between the two.
 
 All number arithmetic is handled as floating point arithmetic.
@@ -190,21 +190,21 @@ console.log(bread2.name);
 //functions that can make an object with the 'new' keyword
 
 function Node (id, value, next) {
- var value = value;
- this.id = id
- this.next = next;
+ this.id = id; ///0
+ var value = value; //5
+ this.next = next; //-1
+
  this.returnValue = function() {
   return value;
  }
 }
 
-var node[]
-
 var node = new Node(0, 5, -1);
 
-alert(node.id);
-alert(node.returnValue());
-alert(node.next);
+
+console.log(node.id);
+console.log(node.returnValue());
+console.log(node.next);
 
 /*Small note:
  'new' makes any function become a constructor.

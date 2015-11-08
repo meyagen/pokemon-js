@@ -1,5 +1,9 @@
+// basic dom manipulation using vanilla js and jquery
+
+// init ensures that the html file loads all the elements before the script runs
 window.onload = init;
 
+// example of DOM manipulation using vanilla javascript
 function init(){
 	var name = document.getElementById('pokemon-name');
 	var last_name = document.createTextNode(' Pikapi');
@@ -12,6 +16,7 @@ function init(){
 	var opponentIMG = document.getElementById('opponent-name');
 }
 
+// example of DOM manipulation using jquery
 $(function(){
 	var name = $('#pokemon-name');
 	name.html('MIREYA');
